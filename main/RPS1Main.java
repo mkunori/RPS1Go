@@ -44,20 +44,22 @@ public class RPS1Main extends JFrame {
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
 
-        // CPUの戦略ボタンを配置する。
+        // CPUの戦略リストを配置する。
         JPanel strategyPanel = new JPanel();
-        JButton randomButton = new JButton("Random CPU");
-        JButton copyButton = new JButton("Copy CPU");
-        randomButton.addActionListener(e -> {
-            game.setStrategy(new RandomStrategy());
-            resultLabel.setText("CPU戦略: Random");
+        String[] strategies = {"Random", "Copy"};
+        JComboBox<String> strategyBox = new JComboBox<>(strategies);
+        strategyBox.addActionListener(e -> {
+            String selected = (String) strategyBox.getSelectedItem();
+            if ("Random".equals(selected)) {
+                game.setStrategy(new RandomStrategy());
+                resultLabel.setText("CPU戦略: Random");
+            } else if ("Copy".equals(selected)) {
+                game.setStrategy(new CopyPlayerStrategy());
+                resultLabel.setText("CPU戦略: Copy");
+            }
         });
-        copyButton.addActionListener(e -> {
-            game.setStrategy(new CopyPlayerStrategy());
-            resultLabel.setText("CPU戦略: Copy");
-        });
-        strategyPanel.add(randomButton);
-        strategyPanel.add(copyButton);
+        strategyPanel.add(new JLabel("CPU戦略"));
+        strategyPanel.add(strategyBox);
         topPanel.add(strategyPanel, BorderLayout.NORTH);
 
         // スコア表示を配置する
