@@ -3,6 +3,7 @@ package main;
 import javax.swing.*;
 import game.Hands;
 import game.RPSGame;
+import game.Result;
 import game.RoundResult;
 import strategy.CopyPlayerStrategy;
 import strategy.RandomStrategy;
@@ -12,6 +13,9 @@ public class RPS1Main extends JFrame {
     private JLabel resultLabel;
     private JLabel cpuLabel;
     private RPSGame game = new RPSGame(new RandomStrategy());
+    private int playerScore = 0;
+    private int cpuScore = 0;
+    private JLabel scoreLabel;
 
     // コンストラクタ
     public RPS1Main() {
@@ -56,9 +60,14 @@ public class RPS1Main extends JFrame {
         strategyPanel.add(copyButton);
         topPanel.add(strategyPanel, BorderLayout.NORTH);
 
+        // スコア表示を配置する
+        scoreLabel = new JLabel("あなた 0 : 0 CPU", SwingConstants.CENTER);
+        scoreLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
+        topPanel.add(scoreLabel, BorderLayout.CENTER);
+
         // CPUの手を配置する
         cpuLabel = new JLabel("CPU ?", SwingConstants.CENTER);
-        cpuLabel.setFont(new Font("Sanserif", Font.BOLD, 80));
+        cpuLabel.setFont(new Font("Sansserif", Font.BOLD, 80));
         topPanel.add(cpuLabel, BorderLayout.SOUTH);
 
         add(topPanel, BorderLayout.NORTH);
@@ -75,7 +84,18 @@ public class RPS1Main extends JFrame {
         RoundResult round = game.play(playerHand);
         // CPUの手を表示する
         cpuLabel.setText(round.getCpu().getSymbol());
-        // プレイヤーに結果を表示する
+        // スコアを更新する
+        Result result = round.getResult();
+        if (result == Result.WIN) {
+            playerScore++;
+        } else if (result == Result.LOSE) {
+            cpuScore++;
+        } else {
+            // あいこは更新なし
+        }
+        // スコアを表示する
+        scoreLabel.setText("あなた " + playerScore + " : " + cpuScore + " CPU");
+        // 結果を表示する
         resultLabel.setText(round.getResult().toString());
     }
 
