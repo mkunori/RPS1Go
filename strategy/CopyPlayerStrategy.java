@@ -1,3 +1,7 @@
+package strategy;
+
+import game.Hands;
+
 public class CopyPlayerStrategy implements CPUStrategy {
     private Hands lastPlayer = Hands.ROCK;
 

@@ -1,4 +1,11 @@
+package main;
+
 import javax.swing.*;
+import game.Hands;
+import game.RPSGame;
+import game.RoundResult;
+import strategy.CopyPlayerStrategy;
+import strategy.RandomStrategy;
 import java.awt.*;
 
 public class RPS1Main extends JFrame {

@@ -1,3 +1,8 @@
+package game;
+
+import strategy.CPUStrategy;
+import strategy.CopyPlayerStrategy;
+
 public class RPSGame {
     private CPUStrategy cpuStrategy; // CPUの戦略
 

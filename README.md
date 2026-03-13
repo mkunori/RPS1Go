@@ -1,9 +1,14 @@
-### クラス概要
-- RPSMain (Swing UI)
-- RPSGame (ゲームロジック)
-- Hands (じゃんけんの手)
-- Result (勝敗)
-- RoundResult (1回の結果)
-- CPUStrategy (CPUの戦略インターフェース)
-- RandomStrategy (CPU戦略:ランダム)
-- CopyPlayerStrategy (CPU戦略:コピー)
+### クラス分け
+- main
+  - RPSMain (UI)
+- game
+  - RPSGame (じゃんけん進行)
+  - Hands (じゃんけんの手)
+  - Result (勝ち負けあいこ)
+  - RoundResult (対戦結果)
+- strategy
+  - CPUStrategy (CPU戦略インターフェース)
+  - RandomStrategy (ランダム)
+  - CopyPlayerStrategy (コピー)
+### デザインパターン
+- Strategy Pattern (CPU戦略)

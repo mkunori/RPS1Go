@@ -1,3 +1,5 @@
+package game;
+
 public class RoundResult {
     private final Hands player;
     private final Hands cpu;
