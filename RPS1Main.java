@@ -4,16 +4,16 @@ import java.awt.*;
 public class RPS1Main extends JFrame {
     private JLabel resultLabel;
     private JLabel cpuLabel;
-    private RPSGame game = new RPSGame();
+    private RPSGame game = new RPSGame(new RandomStrategy());
 
     // コンストラクタ
     public RPS1Main() {
         setTitle("じゃんけんゲーム1号");
-        setSize(600, 400);
+        setSize(700, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // じゃんけんの手パネルを配置する
+        // じゃんけんの手を配置する
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 20));
         Font handFont = new Font("SansSerif", Font.BOLD, 80);
         JButton rockButton = new JButton("✊"); // グー
@@ -26,16 +26,35 @@ public class RPS1Main extends JFrame {
         buttonPanel.add(scissorsButton);
         buttonPanel.add(paperButton);
         add(buttonPanel, BorderLayout.CENTER);
-
-        // じゃんけんボタンイベントを設定する
         rockButton.addActionListener(e -> play(Hands.ROCK));
         scissorsButton.addActionListener(e -> play(Hands.SCISSORS));
         paperButton.addActionListener(e -> play(Hands.PAPER));
 
-        // CPUのパネルを配置する
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BorderLayout());
+
+        // CPUの戦略ボタンを配置する。
+        JPanel strategyPanel = new JPanel();
+        JButton randomButton = new JButton("Random CPU");
+        JButton copyButton = new JButton("Copy CPU");
+        randomButton.addActionListener(e -> {
+            game.setStrategy(new RandomStrategy());
+            resultLabel.setText("CPU戦略: Random");
+        });
+        copyButton.addActionListener(e -> {
+            game.setStrategy(new CopyPlayerStrategy());
+            resultLabel.setText("CPU戦略: Copy");
+        });
+        strategyPanel.add(randomButton);
+        strategyPanel.add(copyButton);
+        topPanel.add(strategyPanel, BorderLayout.NORTH);
+
+        // CPUの手を配置する
         cpuLabel = new JLabel("CPU ?", SwingConstants.CENTER);
         cpuLabel.setFont(new Font("Sanserif", Font.BOLD, 80));
-        add(cpuLabel, BorderLayout.NORTH);
+        topPanel.add(cpuLabel, BorderLayout.SOUTH);
+
+        add(topPanel, BorderLayout.NORTH);
 
         // 結果パネルを配置する
         resultLabel = new JLabel("ボタンを押してください。", SwingConstants.CENTER);
