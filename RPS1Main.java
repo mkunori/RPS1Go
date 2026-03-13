@@ -6,11 +6,6 @@ public class RPS1Main extends JFrame {
     private JLabel resultLabel;
     private JLabel cpuLabel;
     private Random random = new Random();
-    private String[] hands = {"✊", "✌", "✋"};
-
-    private enum Hands {
-        ROCK, SCISSORS, PAPER;
-    }
 
     // コンストラクタ
     public RPS1Main() {
@@ -51,9 +46,13 @@ public class RPS1Main extends JFrame {
 
     // じゃんけんを実行する
     private void play(Hands playerHand) {
-        Hands cpuHand = Hands.values()[random.nextInt(3)];
-        cpuLabel.setText(hands[cpuHand.ordinal()]);
+        // CPUの手を決めて表示する
+        Hands cpuHand = Hands.randomHand();
+        // いざ対戦！
         String result = judge(playerHand, cpuHand);
+        // CPUの手を表示する
+        cpuLabel.setText(cpuHand.getSymbol());
+        // プレイヤーに結果を表示する
         resultLabel.setText("結果: " + result);
     }
 
