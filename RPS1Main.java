@@ -1,11 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
 
 public class RPS1Main extends JFrame {
     private JLabel resultLabel;
     private JLabel cpuLabel;
-    private Random random = new Random();
 
     // コンストラクタ
     public RPS1Main() {
@@ -58,17 +56,15 @@ public class RPS1Main extends JFrame {
 
     // 勝敗を判定する
     private String judge(Hands player, Hands cpu) {
-        if (player == cpu) {
-            return "あいこ";
+        switch (player.fight(cpu)) {
+            case WIN:
+                return "あなたの勝ち";
+            case LOSE:
+                return "あなたの負け";
+            case DRAW:
+                return "あいこ";
         }
-
-        if ((player == Hands.ROCK && cpu == Hands.SCISSORS)
-                || (player == Hands.SCISSORS && cpu == Hands.PAPER)
-                || (player == Hands.PAPER && cpu == Hands.ROCK)) {
-            return "あなたの勝ち";
-        }
-
-        return "あなたの負け";
+        return "Error";
     }
 
     public static void main(String[] args) {
