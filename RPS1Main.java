@@ -4,6 +4,7 @@ import java.awt.*;
 public class RPS1Main extends JFrame {
     private JLabel resultLabel;
     private JLabel cpuLabel;
+    private RPSGame game = new RPSGame();
 
     // コンストラクタ
     public RPS1Main() {
@@ -44,27 +45,12 @@ public class RPS1Main extends JFrame {
 
     // じゃんけんを実行する
     private void play(Hands playerHand) {
-        // CPUの手を決めて表示する
-        Hands cpuHand = Hands.randomHand();
         // いざ対戦！
-        String result = judge(playerHand, cpuHand);
+        RoundResult round = game.play(playerHand);
         // CPUの手を表示する
-        cpuLabel.setText(cpuHand.getSymbol());
+        cpuLabel.setText(round.getCpu().getSymbol());
         // プレイヤーに結果を表示する
-        resultLabel.setText("結果: " + result);
-    }
-
-    // 勝敗を判定する
-    private String judge(Hands player, Hands cpu) {
-        switch (player.fight(cpu)) {
-            case WIN:
-                return "あなたの勝ち";
-            case LOSE:
-                return "あなたの負け";
-            case DRAW:
-                return "あいこ";
-        }
-        return "Error";
+        resultLabel.setText(round.getResult().toString());
     }
 
     public static void main(String[] args) {
