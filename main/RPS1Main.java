@@ -9,15 +9,37 @@ import strategy.CopyPlayerStrategy;
 import strategy.RandomStrategy;
 import java.awt.*;
 
+/**
+ * Swingで作成したじゃんけんゲームのメイン画面クラス。
+ *
+ * プレイヤーがボタンで手を選択し、CPUと対戦する。
+ * また、CPU戦略の切り替え、スコア表示、対戦結果表示を行う。
+ */
 public class RPS1Main extends JFrame {
+    /** 対戦結果を表示するラベル。 */
     private JLabel resultLabel;
+
+    /** CPUの手を表示するラベル。 */
     private JLabel cpuLabel;
+
+    /** ゲーム進行を管理するオブジェクト。 */
     private RPSGame game = new RPSGame(new RandomStrategy());
+
+    /** プレイヤーのスコア。 */
     private int playerScore = 0;
+
+    /** CPUのスコア。 */
     private int cpuScore = 0;
+
+    /** スコアを表示するラベル。 */
     private JLabel scoreLabel;
 
-    // コンストラクタ
+    /**
+     * メイン画面を初期化する。
+     *
+     * 画面内の各種パネル、ボタン、ラベルを生成し、
+     * イベント処理を設定する。
+     */
     public RPS1Main() {
         setTitle("じゃんけんゲーム1号");
         setSize(700, 400);
@@ -41,10 +63,11 @@ public class RPS1Main extends JFrame {
         scissorsButton.addActionListener(e -> play(Hands.SCISSORS));
         paperButton.addActionListener(e -> play(Hands.PAPER));
 
+        // 上部パネルを作成する。
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
 
-        // CPUの戦略リストを配置する。
+        // CPUの戦略を選択するプルダウンを配置する。
         JPanel strategyPanel = new JPanel();
         String[] strategies = {"Random", "Copy"};
         JComboBox<String> strategyBox = new JComboBox<>(strategies);
@@ -62,31 +85,39 @@ public class RPS1Main extends JFrame {
         strategyPanel.add(strategyBox);
         topPanel.add(strategyPanel, BorderLayout.NORTH);
 
-        // スコア表示を配置する
+        // スコア表示ラベルを配置する。
         scoreLabel = new JLabel("あなた 0 : 0 CPU", SwingConstants.CENTER);
         scoreLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
         topPanel.add(scoreLabel, BorderLayout.CENTER);
 
-        // CPUの手を配置する
+        // CPUの手を表示するラベルを配置する。
         cpuLabel = new JLabel("CPU ?", SwingConstants.CENTER);
-        cpuLabel.setFont(new Font("Sansserif", Font.BOLD, 80));
+        cpuLabel.setFont(new Font("SansSerif", Font.BOLD, 80));
         topPanel.add(cpuLabel, BorderLayout.SOUTH);
 
         add(topPanel, BorderLayout.NORTH);
 
-        // 結果パネルを配置する
+        // 対戦結果表示パネルを配置する。
         resultLabel = new JLabel("ボタンを押してください。", SwingConstants.CENTER);
         resultLabel.setFont(new Font("SansSerif", Font.PLAIN, 30));
         add(resultLabel, BorderLayout.SOUTH);
     }
 
-    // じゃんけんを実行する
+    /**
+     * じゃんけんを1回実行し、画面表示を更新する。
+     *
+     * プレイヤーの手を受け取り、CPUとの対戦結果に応じて
+     * CPU表示、スコア表示、結果表示を更新する。
+     *
+     * @param playerHand プレイヤーが選択した手
+     */
     private void play(Hands playerHand) {
-        // いざ対戦！
         RoundResult round = game.play(playerHand);
+
         // CPUの手を表示する
         cpuLabel.setText(round.getCpu().getSymbol());
-        // スコアを更新する
+
+        // 勝敗に応じてスコアを更新する
         Result result = round.getResult();
         if (result == Result.WIN) {
             playerScore++;
@@ -97,10 +128,16 @@ public class RPS1Main extends JFrame {
         }
         // スコアを表示する
         scoreLabel.setText("あなた " + playerScore + " : " + cpuScore + " CPU");
+
         // 結果を表示する
         resultLabel.setText(round.getResult().toString());
     }
 
+    /**
+     * アプリケーションを起動する。
+     *
+     * @param args コマンドライン引数
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             new RPS1Main().setVisible(true);
