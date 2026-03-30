@@ -9,7 +9,7 @@ import java.awt.*;
 
 /**
  * Swingで作成したじゃんけんゲームのメイン画面クラス。
- *
+ * 
  * プレイヤーがボタンで手を選択し、CPUと対戦する。
  * また、CPU戦略の切り替え、スコア表示、対戦結果表示を行う。
  */
@@ -34,7 +34,7 @@ public class RPS1Main extends JFrame {
 
     /**
      * メイン画面を初期化する。
-     *
+     * 
      * 画面内の各種パネル、ボタン、ラベルを生成し、
      * イベント処理を設定する。
      */
@@ -103,10 +103,10 @@ public class RPS1Main extends JFrame {
 
     /**
      * じゃんけんを1回実行し、画面表示を更新する。
-     *
+     * 
      * プレイヤーの手を受け取り、CPUとの対戦結果に応じて
      * CPU表示、スコア表示、結果表示を更新する。
-     *
+     * 
      * @param playerHand プレイヤーが選択した手
      */
     private void play(Hands playerHand) {
@@ -133,7 +133,7 @@ public class RPS1Main extends JFrame {
 
     /**
      * アプリケーションを起動する。
-     *
+     * 
      * @param args コマンドライン引数
      */
     public static void main(String[] args) {

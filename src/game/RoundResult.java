@@ -2,7 +2,7 @@ package game;
 
 /**
  * 1回のじゃんけん対戦結果を保持するクラス。
- *
+ * 
  * プレイヤーの手、CPUの手、勝敗結果をまとめて管理する。
  */
 public class RoundResult {
@@ -12,9 +12,9 @@ public class RoundResult {
 
     /**
      * 対戦結果を生成する。
-     *
+     * 
      * @param player プレイヤーの手
-     * @param cpu CPUの手
+     * @param cpu    CPUの手
      * @param result 勝敗結果
      */
     public RoundResult(Hands player, Hands cpu, Result result) {
