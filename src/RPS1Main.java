@@ -1,5 +1,3 @@
-package main;
-
 import javax.swing.*;
 import game.Hands;
 import game.RPSGame;
@@ -69,7 +67,7 @@ public class RPS1Main extends JFrame {
 
         // CPUの戦略を選択するプルダウンを配置する。
         JPanel strategyPanel = new JPanel();
-        String[] strategies = {"Random", "Copy"};
+        String[] strategies = { "Random", "Copy" };
         JComboBox<String> strategyBox = new JComboBox<>(strategies);
         strategyBox.addActionListener(e -> {
             String selected = (String) strategyBox.getSelectedItem();
