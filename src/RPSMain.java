@@ -1,11 +1,13 @@
+import java.awt.*;
 import javax.swing.*;
+
 import game.Hands;
 import game.RPSGame;
 import game.Result;
 import game.RoundResult;
+
 import strategy.CopyPlayerStrategy;
 import strategy.RandomStrategy;
-import java.awt.*;
 
 /**
  * Swingで作成したじゃんけんゲームのメイン画面クラス。
@@ -13,7 +15,7 @@ import java.awt.*;
  * プレイヤーがボタンで手を選択し、CPUと対戦する。
  * また、CPU戦略の切り替え、スコア表示、対戦結果表示を行う。
  */
-public class RPS1Main extends JFrame {
+public class RPSMain extends JFrame {
     /** 対戦結果を表示するラベル。 */
     private JLabel resultLabel;
 
@@ -38,8 +40,8 @@ public class RPS1Main extends JFrame {
      * 画面内の各種パネル、ボタン、ラベルを生成し、
      * イベント処理を設定する。
      */
-    public RPS1Main() {
-        setTitle("じゃんけんゲーム1号");
+    public RPSMain() {
+        setTitle("じゃんけんゲーム");
         setSize(700, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -138,7 +140,7 @@ public class RPS1Main extends JFrame {
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new RPS1Main().setVisible(true);
+            new RPSMain().setVisible(true);
         });
     }
 
